@@ -16,14 +16,14 @@ description: 使用 Finnhub 获取美股/全球股票的实时报价、公司档
 通过 Python 脚本调用：
 
 ```bash
-python3 /Users/dtbllsj/.openclaw/workspace/skills/finnhub/scripts/finnhub_cli.py <command> [args] [--json] [--limit N]
+python3 ~/.openclaw/workspace/skills/finnhub/scripts/finnhub_cli.py <command> [args] [--json] [--limit N]
 ```
 
 或更简洁（在代理中直接用 exec 工具运行）：
 
 ```
-PYTHON=/Users/dtbllsj/.pyenv/versions/3.12.12/bin/python3
-SCRIPT=/Users/dtbllsj/.openclaw/workspace/skills/finnhub/scripts/finnhub_cli.py
+PYTHON=/usr/bin/python3
+SCRIPT=~/.openclaw/workspace/skills/finnhub-pro-1/scripts/finnhub_cli.py
 ```
 
 ## 免费层支持的命令
@@ -35,7 +35,7 @@ python3 $SCRIPT quote NVDA
 python3 $SCRIPT quote TSLA --json   # 返回原始JSON
 ```
 
-### 公司��案
+### 公司档案
 ```bash
 python3 $SCRIPT profile AAPL
 python3 $SCRIPT profile BABA

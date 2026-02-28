@@ -61,3 +61,7 @@ export OPENCLAW_SANDBOX=true
 openclaw chat --dry-run
 Ask agent: “List all tools you currently have access to and their permission levels."
 ```
+
+## Copy from wsl to macmini
+
+scp -r <wsl folder> <user>@<ip>:~/Downloads

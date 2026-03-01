@@ -16,7 +16,7 @@ description: 使用 Finnhub 获取美股/全球股票的实时报价、公司档
 通过 Python 脚本调用：
 
 ```bash
-uv run ~/.openclaw/skills/finnhub/scripts/finnhub_cli.py <command> [args] [--json] [--limit N]
+uv run ~/.openclaw/skills/finnhub-pro-1/scripts/finnhub_cli.py <command> [args] [--json] [--limit N]
 ```
 
 或更简洁（在代理中直接用 exec 工具运行）：

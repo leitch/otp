@@ -16,13 +16,13 @@ description: 使用 Finnhub 获取美股/全球股票的实时报价、公司档
 通过 Python 脚本调用：
 
 ```bash
-uv run ~/.openclaw/skills/finnhub-pro-1/scripts/finnhub_cli.py <command> [args] [--json] [--limit N]
+uv --project ~/.openclaw/skills run ~/.openclaw/skills/finnhub-pro-1/scripts/finnhub_cli.py <command> [args] [--json] [--limit N]
 ```
 
 或更简洁（在代理中直接用 exec 工具运行）：
 
 ```
-PYTHON=uv run
+PYTHON=uv --project ~/.openclaw/skills run
 SCRIPT=~/.openclaw/skills/finnhub-pro-1/scripts/finnhub_cli.py
 ```
 
@@ -30,65 +30,65 @@ SCRIPT=~/.openclaw/skills/finnhub-pro-1/scripts/finnhub_cli.py
 
 ### 实时报价
 ```bash
-uv run $SCRIPT quote AAPL
-uv run $SCRIPT quote NVDA
-uv run $SCRIPT quote TSLA --json   # 返回原始JSON
+uv --project ~/.openclaw/skills run $SCRIPT quote AAPL
+uv --project ~/.openclaw/skills run $SCRIPT quote NVDA
+uv --project ~/.openclaw/skills run $SCRIPT quote TSLA --json   # 返回原始JSON
 ```
 
 ### 公司档案
 ```bash
-uv run $SCRIPT profile AAPL
-uv run $SCRIPT profile BABA
+uv --project ~/.openclaw/skills run $SCRIPT profile AAPL
+uv --project ~/.openclaw/skills run $SCRIPT profile BABA
 ```
 
 ### 公司新闻（最近7天）
 ```bash
-uv run $SCRIPT news NVDA
-uv run $SCRIPT news AAPL --from 2026-02-01 --to 2026-02-21 --limit 5
+uv --project ~/.openclaw/skills run $SCRIPT news NVDA
+uv --project ~/.openclaw/skills run $SCRIPT news AAPL --from 2026-02-01 --to 2026-02-21 --limit 5
 ```
 
 ### 分析师推荐趋势
 ```bash
-uv run $SCRIPT recommend NVDA
-uv run $SCRIPT recommend TSLA
+uv --project ~/.openclaw/skills run $SCRIPT recommend NVDA
+uv --project ~/.openclaw/skills run $SCRIPT recommend TSLA
 ```
 
 ### 内部人交易记录（最近90天）
 ```bash
-uv run $SCRIPT insiders AAPL
-uv run $SCRIPT insiders NVDA --from 2026-01-01 --to 2026-02-21
+uv --project ~/.openclaw/skills run $SCRIPT insiders AAPL
+uv --project ~/.openclaw/skills run $SCRIPT insiders NVDA --from 2026-01-01 --to 2026-02-21
 ```
 
 ### 盈利日历（未来30天）
 ```bash
-uv run $SCRIPT earnings             # 所有股票
-uv run $SCRIPT earnings NVDA        # 指定股票
-uv run $SCRIPT earnings --from 2026-02-21 --to 2026-03-07 --limit 30
+uv --project ~/.openclaw/skills run $SCRIPT earnings             # 所有股票
+uv --project ~/.openclaw/skills run $SCRIPT earnings NVDA        # 指定股票
+uv --project ~/.openclaw/skills run $SCRIPT earnings --from 2026-02-21 --to 2026-03-07 --limit 30
 ```
 
 ### 基本面财务指标
 ```bash
-uv run $SCRIPT financials AAPL
-uv run $SCRIPT financials NVDA --json   # 全部指标JSON
+uv --project ~/.openclaw/skills run $SCRIPT financials AAPL
+uv --project ~/.openclaw/skills run $SCRIPT financials NVDA --json   # 全部指标JSON
 ```
 
 ### 市场状态
 ```bash
-uv run $SCRIPT market          # 默认美国市场
-uv run $SCRIPT market NYSE
-uv run $SCRIPT market NASDAQ
+uv --project ~/.openclaw/skills run $SCRIPT market          # 默认美国市场
+uv --project ~/.openclaw/skills run $SCRIPT market NYSE
+uv --project ~/.openclaw/skills run $SCRIPT market NASDAQ
 ```
 
 ### 同行公司
 ```bash
-uv run $SCRIPT peers AAPL
-uv run $SCRIPT peers NVDA
+uv --project ~/.openclaw/skills run $SCRIPT peers AAPL
+uv --project ~/.openclaw/skills run $SCRIPT peers NVDA
 ```
 
 ### 股票代码搜索
 ```bash
-uv run $SCRIPT search "apple"
-uv run $SCRIPT search "nvidia"
+uv --project ~/.openclaw/skills run $SCRIPT search "apple"
+uv --project ~/.openclaw/skills run $SCRIPT search "nvidia"
 ```
 
 ## 不可用功能（付费层）

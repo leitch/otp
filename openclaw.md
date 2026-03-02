@@ -34,8 +34,11 @@ sudo chown -R $(whoami) /usr/local/lib/node_modules
 npm cache clean --force
 openclaw gateway restart
 openclaw doctor --repair
+
+Device pairing:
 openclaw devices list
 openclaw devices approve
+
 openclaw configure
 
 tar -cvzf openclaw_backup.tar.gz ~/.openclaw

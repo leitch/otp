@@ -79,9 +79,16 @@ head -50 ~/.openclaw/logs/gateway.log
 launchctl print gui/$(id -u)/ai.openclaw.gateway
 
 # Open the plist and update the version
-nano ~/Library/LaunchAgents/ai.openclaw.gateway.plist
-# Find OPENCLAW_SERVICE_VERSION and change 2026.2.21-2 to 2026.3.1
+vi ~/Library/LaunchAgents/ai.openclaw.gateway.plist
+
+# Find OPENCLAW_SERVICE_VERSION and update 
+sed -i '' 's/2026.2.21-2/2026.3.1/g' ~/Library/LaunchAgents/ai.openclaw.gateway.plist
 
 # Reload the daemon
 launchctl unload ~/Library/LaunchAgents/ai.openclaw.gateway.plist
 launchctl load ~/Library/LaunchAgents/ai.openclaw.gateway.plist
+
+# Confirm version
+launchctl print gui/$(id -u)/ai.openclaw.gateway | grep SERVICE_VERSION
+openclaw status --json | grep version
+openclaw --version

@@ -68,3 +68,20 @@ Ask agent: “List all tools you currently have access to and their permission l
 ## Copy from wsl to macmini
 
 scp -r <wsl folder> <user>@<ip>:~/Downloads
+
+# Check the gateway error log for startup version info
+head -50 ~/.openclaw/logs/gateway.err.log
+
+# Check the gateway log for version at startup
+head -50 ~/.openclaw/logs/gateway.log
+
+# Check how the launchd service was registered
+launchctl print gui/$(id -u)/ai.openclaw.gateway
+
+# Open the plist and update the version
+nano ~/Library/LaunchAgents/ai.openclaw.gateway.plist
+# Find OPENCLAW_SERVICE_VERSION and change 2026.2.21-2 to 2026.3.1
+
+# Reload the daemon
+launchctl unload ~/Library/LaunchAgents/ai.openclaw.gateway.plist
+launchctl load ~/Library/LaunchAgents/ai.openclaw.gateway.plist

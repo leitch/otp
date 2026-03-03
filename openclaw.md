@@ -69,6 +69,9 @@ Ask agent: “List all tools you currently have access to and their permission l
 
 scp -r <wsl folder> <user>@<ip>:~/Downloads
 
+# Display openclaw status in json
+openclaw status --json 2>/dev/null
+
 # Check the gateway error log for startup version info
 head -50 ~/.openclaw/logs/gateway.err.log
 

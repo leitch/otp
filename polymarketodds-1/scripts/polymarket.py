@@ -1176,6 +1176,49 @@ def cmd_sell(args):
     except Exception as e:
         print(f"❌ Error: {e}")
 
+def cmd_data_delete(args):
+    """Delete all user data (GDPR Right to Erasure - Article 17)."""
+    import shutil
+    
+    print("⚠️  This will permanently delete:")
+    print("  • Watchlist entries")
+    print("  • Portfolio positions & history")
+    print("  • Audit logs")
+    print()
+    
+    confirm = input("Type 'DELETE ALL' to confirm deletion: ")
+    
+    if confirm != 'DELETE ALL':
+        print("❌ Cancelled")
+        return
+    
+    try:
+        if DATA_DIR.exists():
+            shutil.rmtree(DATA_DIR, ignore_errors=True)
+        print("✅ All data permanently deleted")
+    except Exception as e:
+        print(f"❌ Error deleting data: {e}")
+
+def cmd_data_export(args):
+    """Export all user data (GDPR Right to Data Portability - Article 20)."""
+    try:
+        export_data = {
+            'exported_at': datetime.now(timezone.utc).isoformat(),
+            'watchlist': load_json('watchlist.json', {}),
+            'portfolio': load_json('portfolio.json', {}),
+        }
+        
+        export_filename = f"polymarket_export_{datetime.now().strftime('%Y%m%d_%H%M%S')}.json"
+        export_path = Path.cwd() / export_filename
+        
+        with open(export_path, 'w') as f:
+            json.dump(export_data, f, indent=2, default=str)
+        
+        os.chmod(export_path, 0o600)
+        print(f"✅ Data exported to {export_path}")
+        
+    except Exception as e:
+        print(f"❌ Error exporting data: {e}")
 
 # ==================== MAIN ====================
 
@@ -1243,6 +1286,10 @@ def main():
     sell_parser = subparsers.add_parser("sell", help="Paper sell position")
     sell_parser.add_argument("slug", help="Event slug")
     
+    # Add to argparse subparsers:
+    subparsers.add_parser("data-delete", help="Delete all user data (GDPR Right to Erasure)")
+    subparsers.add_parser("data-export", help="Export user data (GDPR Right to Data Portability)")
+
     args = parser.parse_args()
     
     commands = {
@@ -1260,6 +1307,8 @@ def main():
         "portfolio": cmd_portfolio,
         "buy": cmd_buy,
         "sell": cmd_sell,
+        "data-delete": cmd_data_delete,
+        "data-export": cmd_data_export,
     }
     
     try:

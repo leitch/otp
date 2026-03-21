@@ -69,7 +69,8 @@ Ask agent: “List all tools you currently have access to and their permission l
 
 scp -r <wsl folder> <user>@<ip>:~/Downloads
 
-# Display openclaw status in json
+# Display openc
+law status in json
 openclaw status --json 2>/dev/null
 
 # Check the gateway error log for startup version info
@@ -95,3 +96,18 @@ launchctl load ~/Library/LaunchAgents/ai.openclaw.gateway.plist
 launchctl print gui/$(id -u)/ai.openclaw.gateway | grep SERVICE_VERSION
 openclaw status --json | grep version
 openclaw --version
+
+# Browser setup
+openclaw config set browser.enabled true --json
+openclaw config set browser.defaultProfile "openclaw"
+openclaw config set browser.headless true --json
+npx playwright install chromium
+
+find ~/Library/Caches/ms-playwright -name "Google Chrome for Testing"
+openclaw config set browser.executablePath "/Users/oo/Library/Caches/ms-playwright/chromium-1208/chrome-mac-x64/Google Chrome for Testing.app/Contents/MacOS/Google Chrome for Testing"
+
+xattr -rd com.apple.quarantine "/Users/oo/Library/Caches/ms-playwright/chromium-1208/chrome-mac-x64/Google Chrome for Testing.app"
+
+openclaw browser --browser-profile openclaw start
+openclaw browser --browser-profile openclaw open https://google.com
+openclaw browser --browser-profile openclaw snapshot

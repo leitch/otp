@@ -1,4 +1,10 @@
+# Install NVM (Node.js) NOTE: currently use global node/npm/openclaw installation now
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.4/install.sh | bash
+nvm install --lts
+
 # Openclaw Commands
+npm install -g openclaw
+openclaw onboard --install-daemon # this generates ~/Library/LaunchAgents/ai.openclaw.gateway.plist
 
 ```sh
 openclaw message send --channel telegram --target 8416538418 --message “Hi”
@@ -7,6 +13,8 @@ openclaw message send --channel telegram --target 8416538418 --message "Choose:"
 
 killall -9 node 2>/dev/null
 ```
+# Install pnpm
+curl -fsSL https://get.pnpm.io/install.sh | PNPM_HOME="$HOME/Library/pnpm" sh -
 
 ## Github
 
@@ -26,11 +34,9 @@ http://127.0.0.1:18789/?token=1c284b12595d502a033c82b31a7c1c697780f57654f85a2d
 curl http://192.168.40.60:11777/api/tags
 ```
 
-## Upgrade Openclaw
+# Upgrade Openclaw
 
 ```sh
-sudo chown -R $(whoami) ~/.npm
-sudo chown -R $(whoami) /usr/local/lib/node_modules
 npm cache clean --force
 openclaw gateway restart
 openclaw doctor --repair
@@ -69,8 +75,7 @@ Ask agent: “List all tools you currently have access to and their permission l
 
 scp -r <wsl folder> <user>@<ip>:~/Downloads
 
-# Display openc
-law status in json
+# Display openclaw status in json
 openclaw status --json 2>/dev/null
 
 # Check the gateway error log for startup version info
@@ -78,6 +83,9 @@ head -50 ~/.openclaw/logs/gateway.err.log
 
 # Check the gateway log for version at startup
 head -50 ~/.openclaw/logs/gateway.log
+
+# Debug gateway
+tail -f ~/.openclaw/logs/gateway.err.log & tail -f ~/.openclaw/logs/gateway.log        
 
 # Check how the launchd service was registered
 launchctl print gui/$(id -u)/ai.openclaw.gateway
@@ -90,7 +98,9 @@ sed -i '' 's/2026.2.21-2/2026.3.1/g' ~/Library/LaunchAgents/ai.openclaw.gateway.
 
 # Reload the daemon
 launchctl unload ~/Library/LaunchAgents/ai.openclaw.gateway.plist
-launchctl load ~/Library/LaunchAgents/ai.openclaw.gateway.plist
+launchctl load -w ~/Library/LaunchAgents/ai.openclaw.gateway.plist
+launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/ai.openclaw.gateway.plist
+
 
 # Confirm version
 launchctl print gui/$(id -u)/ai.openclaw.gateway | grep SERVICE_VERSION
@@ -101,6 +111,7 @@ openclaw --version
 openclaw config set browser.enabled true --json
 openclaw config set browser.defaultProfile "openclaw"
 openclaw config set browser.headless true --json
+sudo npm install -g playwright
 npx playwright install chromium
 
 find ~/Library/Caches/ms-playwright -name "Google Chrome for Testing"
@@ -108,6 +119,6 @@ openclaw config set browser.executablePath "/Users/oo/Library/Caches/ms-playwrig
 
 xattr -rd com.apple.quarantine "/Users/oo/Library/Caches/ms-playwright/chromium-1208/chrome-mac-x64/Google Chrome for Testing.app"
 
-openclaw browser --browser-profile openclaw start
-openclaw browser --browser-profile openclaw open https://google.com
-openclaw browser --browser-profile openclaw snapshot
+openclaw browser status
+openclaw browser open https://google.com
+openclaw browser snapshot

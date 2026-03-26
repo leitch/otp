@@ -30,6 +30,7 @@ pnpm add -g opencode-ai
 curl -fsSL https://opencode.ai/install | bash
 
 http://127.0.0.1:18789/?token=1c284b12595d502a033c82b31a7c1c697780f57654f85a2d
+http://localhost:18789/?token=1c284b12595d502a033c82b31a7c1c697780f57654f85a2d
 
 curl http://192.168.40.60:11777/api/tags
 ```
@@ -85,6 +86,7 @@ head -50 ~/.openclaw/logs/gateway.err.log
 head -50 ~/.openclaw/logs/gateway.log
 
 # Debug gateway
+openclaw logs
 tail -f ~/.openclaw/logs/gateway.err.log & tail -f ~/.openclaw/logs/gateway.log        
 
 # Check how the launchd service was registered
@@ -118,6 +120,12 @@ find ~/Library/Caches/ms-playwright -name "Google Chrome for Testing"
 openclaw config set browser.executablePath "/Users/oo/Library/Caches/ms-playwright/chromium-1208/chrome-mac-x64/Google Chrome for Testing.app/Contents/MacOS/Google Chrome for Testing"
 
 xattr -rd com.apple.quarantine "/Users/oo/Library/Caches/ms-playwright/chromium-1208/chrome-mac-x64/Google Chrome for Testing.app"
+
+"/Users/oo/Library/Caches/ms-playwright/chromium-1208/chrome-mac-x64/Google Chrome for Testing.app/Contents/MacOS/Google Chrome for Testing" \
+  --remote-debugging-port=18800 \
+  --remote-debugging-address=127.0.0.1 \
+  --no-first-run \
+  --no-default-browser-check &
 
 openclaw browser status
 openclaw browser open https://google.com
